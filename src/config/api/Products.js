@@ -9,6 +9,7 @@ const query = gql`
     poc(id: $id) {
       products(categoryId: $categoryId, search: $search) {
         productVariants {
+          productVariantId
           title
           description
           imageUrl
