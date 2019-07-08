@@ -24,7 +24,7 @@ const ProductItem = styled.li`
 const Products = ({ products }) => (
   <ProductsList>
     {products.map(item => (
-      <ProductItem key={item.productVariants[0].title}>
+      <ProductItem key={item.productVariants[0].productVariantId}>
         <Image url={item.productVariants[0].imageUrl} />
         <Paragraph>{item.productVariants[0].title}</Paragraph>
         <Paragraph size="large">
