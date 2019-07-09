@@ -17,4 +17,6 @@ export default {
   green: '#3DEC95',
   greenLight: '#5DFFAF',
   greenDark: '#33DE89',
+  brandAndroid: '#a4c639',
+  brandApple: '#000',
 };

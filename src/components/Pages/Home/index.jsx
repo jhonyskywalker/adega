@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TemplateMain from '../../Templates/Main';
 import Places from '../../Organisms/Places';
 import Stores from '../../Organisms/Stores';
+import PageHighlight from '../../Molecules/PageHighlight';
 
 class HomePage extends Component {
   saveSession = (params) => {
@@ -32,6 +33,8 @@ class HomePage extends Component {
   render() {
     return (
       <TemplateMain>
+        <PageHighlight />
+
         <Places
           fetchPlaces={this.fetchPlaces}
           places={this.props.places.payload.features}

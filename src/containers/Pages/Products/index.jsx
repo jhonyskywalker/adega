@@ -7,9 +7,11 @@ import Products from '../../../components/Pages/Products';
 const mapStateToProps = ({
   products,
   categories,
+  session,
 }) => ({
   products,
   categories,
+  session,
 });
 
 const mapDispatchToProps = dispatch => ({

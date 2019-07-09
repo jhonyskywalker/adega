@@ -21,7 +21,7 @@ class ProductsPage extends Component {
   render() {
     return (
       <TemplateMain>
-        <Categories categories={this.props.categories.payload.allCategory} />
+        {/* <Categories categories={this.props.categories.payload.allCategory} /> */}
 
         <Products
           products={this.props.products.payload.poc.products}
