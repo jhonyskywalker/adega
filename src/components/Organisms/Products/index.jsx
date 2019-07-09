@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import designSystem from 'designSystem';
@@ -21,20 +21,58 @@ const ProductItem = styled.li`
   width: 200px;
 `;
 
-const Products = ({ products }) => (
-  <ProductsList>
-    {products.map(item => (
-      <ProductItem key={item.productVariants[0].productVariantId}>
-        <Image url={item.productVariants[0].imageUrl} />
-        <Paragraph>{item.productVariants[0].title}</Paragraph>
-        <Paragraph size="large">
-          <Paragraph as="span" size="medium" color="gray">R$ </Paragraph>
-          <Paragraph as="span">{item.productVariants[0].price}</Paragraph>
-        </Paragraph>
-        <Amount />
-      </ProductItem>
-    ))}
-  </ProductsList>
-);
+class Products extends Component {
+  onlyNumber = (value) => /^\d*\.?\d*$/.test(value)
+
+  add = (params) => {
+    this.props.manageProduct({
+      ...params,
+      amount: params.amount += 1,
+    });
+  }
+
+  remove = (params) => {
+    if (params.amount > 0) {
+      this.props.manageProduct({
+        ...params,
+        amount: params.amount -= 1,
+      });
+    }
+  }
+
+  insert = (event, params) => {
+    const value = event.target.value;
+
+    if (this.onlyNumber(value)) {
+      this.props.manageProduct({
+        ...params,
+        amount: parseInt(value),
+      });
+    }
+  }
+
+  render() {
+    return (
+      <ProductsList>
+        {this.props.products.map(item => (
+          <ProductItem key={item.productVariants[0].productVariantId}>
+            <Image url={item.productVariants[0].imageUrl} />
+            <Paragraph>{item.productVariants[0].title}</Paragraph>
+            <Paragraph size="large">
+              <Paragraph as="span" size="medium" color="gray">R$ </Paragraph>
+              <Paragraph as="span">{item.productVariants[0].price}</Paragraph>
+            </Paragraph>
+            <Amount
+              product={item.productVariants[0]}
+              add={this.add}
+              remove={this.remove}
+              insert={this.insert}
+            />
+          </ProductItem>
+        ))}
+      </ProductsList>
+    );
+  }
+}
 
 export default Products;

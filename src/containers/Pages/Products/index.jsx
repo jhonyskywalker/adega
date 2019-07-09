@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { actionFetchPlaces } from 'redux-flow/actions/Places';
-import { actionFetchStores } from 'redux-flow/actions/Stores';
-import { actionFetchProducts } from 'redux-flow/actions/Products';
+import { actionFetchProducts, actionManageProduct } from 'redux-flow/actions/Products';
 import { actionFetchCategories } from 'redux-flow/actions/Categories';
 
 import Products from '../../../components/Pages/Products';
@@ -17,6 +15,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
   fetchProducts: params => dispatch(actionFetchProducts(params)),
   fetchCategories: params => dispatch(actionFetchCategories(params)),
+  manageProduct: params => dispatch(actionManageProduct(params)),
 });
 
 export default connect(
