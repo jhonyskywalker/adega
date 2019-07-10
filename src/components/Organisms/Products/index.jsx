@@ -7,6 +7,7 @@ import Heading from '../../Atoms/Heading';
 import Paragraph from '../../Atoms/Paragraph';
 import Image from '../../Atoms/Image';
 import Amount from '../../Molecules/Amount';
+import Loading from './Loading';
 
 const ProductsContainer = styled.div`
   margin: 0 auto;
@@ -69,8 +70,10 @@ class Products extends Component {
           <Paragraph>Selecione tudo que precisa.</Paragraph>
         </ProductsHeader>
 
+        {this.props.products.loading && <Loading />}
+
         <ProductsList>
-          {this.props.products.map(item => (
+          {this.props.products.payload.poc.products.map(item => (
             <ProductItem key={item.productVariants[0].productVariantId}>
               <Image url={item.productVariants[0].imageUrl} />
               <Paragraph>{item.productVariants[0].title}</Paragraph>

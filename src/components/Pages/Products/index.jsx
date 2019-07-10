@@ -24,7 +24,7 @@ class ProductsPage extends Component {
         {/* <Categories categories={this.props.categories.payload.allCategory} /> */}
 
         <Products
-          products={this.props.products.payload.poc.products}
+          products={this.props.products}
           manageProduct={this.props.manageProduct}
         />
       </TemplateMain>
