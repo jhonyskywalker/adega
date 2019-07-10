@@ -2,7 +2,9 @@ import { SAVE_SESSION } from '../constants/Session';
 
 const initialState = {
   payload: {
-    place: {},
+    place: {
+      visible: false,
+    },
     store: {},
     products: {},
     cart: {},

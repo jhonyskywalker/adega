@@ -31,7 +31,19 @@ const fetchStores = (params, dispatch) => {
       now: params.now,
     },
   }).then((response) => {
-    dispatch(fetchStoresSuccess(response.data));
+    let data = {
+      ...response.data,
+      noContent: false,
+    };
+
+    if (response.data.pocSearch.length === 0) {
+      data = {
+        ...response.data,
+        noContent: true,
+      };
+    }
+
+    dispatch(fetchStoresSuccess(data));
   }).catch(() => {
     dispatch(fetchStoresFailure());
   });

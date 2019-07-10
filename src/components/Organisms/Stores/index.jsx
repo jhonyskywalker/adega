@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import designSystem from 'designSystem';
 
 import Heading from '../../Atoms/Heading';
+import Paragraph from '../../Atoms/Paragraph';
 import Button from '../../Atoms/Button';
+import Loading from './Loading';
 
 const StoreContent = styled.div`
   text-align: center;
@@ -41,13 +43,21 @@ const StoreItemTitle = styled(Heading)`
 
 const Stores = ({ stores, selectStore }) => (
   <StoreContent>
-    {(stores.length > 0) && <StoreTitle>Escolha o fornecedor.</StoreTitle>}
+    {(stores.payload.pocSearch.length > 0) && <StoreTitle>Escolha o fornecedor.</StoreTitle>}
+
+    {stores.loading && <Loading />}
+
+    {(stores.payload.noContent && !stores.loading) && (
+      <Paragraph size="large">
+        Nenhum fornecedor foi encontrado nessa região.
+      </Paragraph>
+    )}
 
     <StoresList>
-      {stores.map(item => (
+      {stores.payload.pocSearch.map(item => (
         <StoreItem onClick={() => selectStore(item)} key={item.id}>
           <StoreItemTitle as="h6">{item.tradingName}</StoreItemTitle>
-          <Button size="medium" color="secondary">Ver produtos</Button>
+          <Button size="medium" color="primary">Ver produtos</Button>
         </StoreItem>
       ))}
     </StoresList>

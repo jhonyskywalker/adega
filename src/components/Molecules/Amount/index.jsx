@@ -29,10 +29,15 @@ const ActionInput = styled.input`
   border: 1px solid ${designSystem.color.green};
 `;
 
-const Amount = ({ remove, insert, add, product }) => (
+const Amount = ({
+  remove,
+  insert,
+  add,
+  product
+}) => (
   <AmountContainer>
     <ActionButton onClick={() => remove({ ...product })}>-</ActionButton>
-    <ActionInput onChange={(event) => insert(event, { ...product })} type="text" value={product.amount} />
+    <ActionInput onChange={event => insert(event, { ...product })} type="text" value={product.amount} />
     <ActionButton onClick={() => add({ ...product })}>+</ActionButton>
   </AmountContainer>
 );

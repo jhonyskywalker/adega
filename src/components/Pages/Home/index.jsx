@@ -7,18 +7,39 @@ import PageHighlight from '../../Molecules/PageHighlight';
 
 class HomePage extends Component {
   saveSession = (params) => {
-    this.props.saveSession({ ...this.props.session.payload, ...params });
+    const { saveSession } = this.props;
+    const { session } = this.props;
+
+    saveSession({ ...session.payload, ...params });
   }
 
   fetchPlaces = (event) => {
-    if (event.target.value.length > 2) {
-      this.props.fetchPlaces({ query: event.target.value });
+    const { value } = event.target;
+    const { fetchPlaces } = this.props;
+
+    this.saveSession({
+      place: {
+        visible: true,
+        place_name: value,
+      },
+    });
+
+    if (value.length > 2) {
+      fetchPlaces({ query: value });
     }
   }
 
   fetchStores = (params) => {
-    this.saveSession({ place: params });
-    this.props.fetchStores({
+    const { fetchStores } = this.props;
+
+    this.saveSession({
+      place: {
+        ...params,
+        visible: false,
+      },
+    });
+
+    fetchStores({
       lat: String(params.center[1]),
       long: String(params.center[0]),
       now: new Date().toJSON(),
@@ -26,23 +47,29 @@ class HomePage extends Component {
   }
 
   selectStore = (params) => {
+    const { history } = this.props;
+
     this.saveSession({ store: params });
-    this.props.history.push(`/products/${params.id}`);
+
+    history.push(`/products/${params.id}`);
   }
 
   render() {
+    const { places, session, stores } = this.props;
+
     return (
       <TemplateMain>
         <PageHighlight />
 
         <Places
           fetchPlaces={this.fetchPlaces}
-          places={this.props.places.payload.features}
+          places={places.payload.features}
           fetchStores={this.fetchStores}
+          session={session}
         />
 
         <Stores
-          stores={this.props.stores.payload.pocSearch}
+          stores={stores}
           selectStore={this.selectStore}
         />
       </TemplateMain>

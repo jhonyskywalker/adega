@@ -9,6 +9,7 @@ const initialState = {
   error: false,
   payload: {
     pocSearch: [],
+    noContent: false,
   },
 };
 

@@ -42,7 +42,7 @@ const SearchField = styled(Input)`
   }
 `;
 
-const Places = ({ fetchPlaces, places, fetchStores }) => (
+const Places = ({ fetchPlaces, places, fetchStores, session }) => (
   <SearchContainer>
     <SearchField
       onChange={fetchPlaces}
@@ -50,17 +50,21 @@ const Places = ({ fetchPlaces, places, fetchStores }) => (
       color="white"
       placeholder="Informe sua localização."
       icon="faSearch"
+      value={session.payload.place.place_name}
+      type="text"
       fluid
     />
 
-    <PlacesList>
-      {places.map(item => (
-        <PlaceItem onClick={() => fetchStores(item)} key={item.id}>
-          <PlaceIcon name="faMapMarkerAlt" />
-          {item.place_name}
-        </PlaceItem>
-      ))}
-    </PlacesList>
+    {session.payload.place.visible && (
+      <PlacesList>
+        {places.map(item => (
+          <PlaceItem onClick={() => fetchStores(item)} key={item.id}>
+            <PlaceIcon name="faMapMarkerAlt" />
+            {item.place_name}
+          </PlaceItem>
+        ))}
+      </PlacesList>
+    )}
   </SearchContainer>
 );
 
