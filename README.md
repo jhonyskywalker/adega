@@ -4,6 +4,7 @@
 
 - Tenha instalado o `NodeJS` versão `v10.15.0` ou superior.
 - Execute o comando `npm install` para instalar as dependências do projeto.
+- Modifique o `.env.sample` para `.env`.
 - Execute o comando `npm start` roda o projeto na porta `4000`.
 - Execute o comando `npm test` para executar as suites de testes.
 
