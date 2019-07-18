@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import designSystem from 'designSystem';
 
@@ -12,6 +13,11 @@ const Header = styled.header`
   padding: ${designSystem.size.base} ${designSystem.size.xm};
   background-color: ${designSystem.color.white};
   text-align: center;
+
+  a {
+    color: ${designSystem.color.black};
+    text-decoration: none;
+  }
 `;
 
 const Content = styled.div`
@@ -25,7 +31,9 @@ const Footer = styled.footer``;
 const Main = ({ children }) => (
   <>
     <Header>
-      <Heading as="h2">Adega</Heading>
+      <Heading as="h2">
+        <Link to="/">Adega</Link>
+      </Heading>
       <Paragraph>Sua bebida do seu jeito.</Paragraph>
     </Header>
 
