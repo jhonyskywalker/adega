@@ -6,9 +6,15 @@ import Products from '../../Organisms/Products';
 
 class ProductsPage extends Component {
   componentDidMount() {
-    if (this.props.products.payload.poc.products.length < 1) {
+    this.fetchProducts({
+      id: this.props.match.params.id,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
       this.fetchProducts({
-        id: this.props.match.params.id,
+        id: nextProps.match.params.id,
       });
     }
   }
