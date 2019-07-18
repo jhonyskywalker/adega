@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import Loadable from 'react-loadable';
 import { ApolloProvider } from 'react-apollo';
@@ -31,6 +31,9 @@ export default () => (
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/products/:id" component={Products} />
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
             </Switch>
           </>
         </ConnectedRouter>
